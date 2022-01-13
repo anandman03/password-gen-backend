@@ -28,7 +28,7 @@ exports.generatePassword = (request, response) => {
 
   let password = '';
   for (let counter = 0; counter < length; counter += 1) {
-    const index = Math.round(Math.random() * characterSet.length);
+    const index = Math.floor(Math.random() * characterSet.length);
     password += characterSet[index];
   }
   return response.status(201).json({ message: password });
