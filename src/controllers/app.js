@@ -16,19 +16,14 @@ exports.generatePassword = (request, response) => {
   }
 
   let characterSet = lowerCharacterSet;
-  if (isUpperCase === 1) {
-    characterSet += upperCharacterSet;
-  }
-  if (isNumeric === 1) {
-    characterSet += numericCharacterSet;
-  }
-  if (isSymbol === 1) {
-    characterSet += symbolCharacterSet;
-  }
+  characterSet += (isUpperCase === 1) ? upperCharacterSet : '';
+  characterSet += (isNumeric === 1) ? numericCharacterSet : '';
+  characterSet += (isSymbol === 1) ? symbolCharacterSet : '';
 
   let password = '';
+  const maxLimit = characterSet.length;
   for (let counter = 0; counter < length; counter += 1) {
-    const index = Math.floor(Math.random() * characterSet.length);
+    const index = Math.floor(Math.random() * maxLimit);
     password += characterSet[index];
   }
   return response.status(201).json({ message: password });
